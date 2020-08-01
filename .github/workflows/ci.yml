@@ -6,6 +6,7 @@ jobs:
   macos_enabled_test:
     runs-on: macos-latest
     steps:
+    - run: echo $PWD && ls -la
     - run: ./test.sh
   macos_disabled_test:
     runs-on: macos-latest
