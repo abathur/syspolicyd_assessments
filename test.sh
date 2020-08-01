@@ -1,19 +1,24 @@
 # create a junk test script
-echo 'echo $RANDOM' > test1
-echo 'echo $RANDOM' > test2
-chmod 755 test1 test2
+test(){
+	# borrowed from https://news.ycombinator.com/item?id=23278258
+	RAND_FILE="/tmp/test-$RANDOM.sh";
+	time_helper() { /usr/bin/time $RAND_FILE 2>&1 | tail -1 | awk '{print $1}'; }  # this just returns the real run time
+	echo $'#!/bin/sh\necho Hello' $RANDOM > $RAND_FILE && chmod a+x  $RAND_FILE;
+	echo "Testing $RAND_FILE";
+	echo "execution time #1: $(time_helper) seconds";
+	echo "execution time #2: $(time_helper) seconds";
+}
 
 # start a log stream that should see these events and throw it into the background
 log stream --debug --info --predicate 'process == "syspolicyd" AND subsystem == "com.apple.securityd" AND category == "gk"' &
 
 # should be a full round-trip + TLS
-time ./test1
+test
 
-# should be cached
-time ./test1
-
-# same content; shouldn't be cached, but just round-trip
-time ./test2
+# subsequent tests are still a full round trip, but no TLS
+for i in {1..10}; do
+	test
+done
 
 # kill job?
 kill $!
