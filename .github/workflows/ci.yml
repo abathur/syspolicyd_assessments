@@ -1,0 +1,18 @@
+name: "Test"
+on:
+  pull_request:
+  push:
+jobs:
+  macos_enabled_test:
+    runs-on: macos-latest
+    steps:
+    - run: ./test.sh
+  macos_disabled_test:
+    runs-on: macos-latest
+    steps:
+    - name: Disable syspolicy assessments
+      run: |
+        spctl --status
+        sudo spctl --master-disable
+        spctl --status || true
+    - run: ./test.sh
