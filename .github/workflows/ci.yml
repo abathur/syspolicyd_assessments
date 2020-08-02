@@ -16,6 +16,6 @@ jobs:
         # spctl --status
         # sudo spctl --master-disable
         # spctl --status || true
-        sudo sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" "REPLACE INTO access VALUES('kTCCServiceDeveloperTool', '/bin/bash',0,1,1,NULL,NULL);"
+        sudo sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" "REPLACE INTO access (service,client,client_type,allowed) VALUES('kTCCServiceDeveloperTool', '/bin/bash',0,1);"
     - uses: actions/checkout@v2
     - run: ./test.sh
