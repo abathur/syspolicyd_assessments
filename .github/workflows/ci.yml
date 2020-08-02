@@ -6,6 +6,7 @@ jobs:
   macos_enabled_test:
     runs-on: macos-latest
     steps:
+    - uses: actions/checkout@v2
     - run: ./test.sh
   macos_disabled_test:
     runs-on: macos-latest
@@ -15,4 +16,5 @@ jobs:
         spctl --status
         sudo spctl --master-disable
         spctl --status || true
+    - uses: actions/checkout@v2
     - run: ./test.sh
