@@ -2,7 +2,7 @@
 test(){
 	# borrowed from https://news.ycombinator.com/item?id=23278258
 	RAND_FILE="/tmp/test-$RANDOM.sh";
-	time_helper() { /usr/bin/time $RAND_FILE 2>&1 | tail -1 | awk '{print $1}'; }  # this just returns the real run time
+	time_helper() { /usr/bin/time sudo $RAND_FILE 2>&1 | tail -1 | awk '{print $1}'; }  # this just returns the real run time
 	echo $'#!/bin/sh\necho Hello' $RANDOM > $RAND_FILE && chmod a+x  $RAND_FILE;
 	echo "Testing $RAND_FILE";
 	echo "execution time #1: $(time_helper) seconds";
