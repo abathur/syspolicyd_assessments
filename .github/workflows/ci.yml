@@ -13,8 +13,9 @@ jobs:
     steps:
     - name: Disable syspolicy assessments
       run: |
-        spctl --status
-        sudo spctl --master-disable
-        spctl --status || true
+        # spctl --status
+        # sudo spctl --master-disable
+        # spctl --status || true
+        sudo sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" "REPLACE INTO access VALUES('kTCCServiceDeveloperTool', '/bin/bash',0,1,1,NULL,NULL);
     - uses: actions/checkout@v2
     - run: ./test.sh
