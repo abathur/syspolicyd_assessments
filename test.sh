@@ -20,5 +20,7 @@ for i in {1..10}; do
 	test
 done
 
+ps -AM
+
 # kill job?
 kill $!
