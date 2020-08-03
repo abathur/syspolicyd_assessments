@@ -12,6 +12,8 @@ test(){
 	#sysctl security.mac.asp
 }
 
+# gorsh, made it so long I need to grab sudo
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # start a log stream that should see these events and throw it into the background
 # log stream --debug | tee $1 &
 
