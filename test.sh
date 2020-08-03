@@ -12,8 +12,18 @@ test(){
 	#sysctl security.mac.asp
 }
 
+declare got_sudo
+grab_and_hold_sudo(){
+	if sudo -v; then
+  	while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+  	got_sudo=1
+  	return 0
+  else
+  	return 1
+  fi
+}
 # gorsh, made it so long I need to grab sudo
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+grab_and_hold_sudo
 # start a log stream that should see these events and throw it into the background
 # log stream --debug | tee $1 &
 
