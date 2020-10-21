@@ -25,11 +25,6 @@ jobs:
         os: [ macos-latest, macos-11.0 ]
       fail-fast: false
     steps:
-    - name: Disable syspolicy assessments
-      run: |
-        spctl --status
-        sudo spctl --master-disable
-        spctl --status || true
     - uses: actions/checkout@v2
     - uses: cachix/install-nix-action@v10
       with:
