@@ -9,4 +9,6 @@ spawn sudo fdesetup enable -user runner
 # send "$PASSPHRASE\r"
 expect "Enter the password for user 'runner':"
 send "$PASSPHRASE\r"
+expect "Enter the password for user 'runner':"
+send "$PASSPHRASE\r"
 expect eof
