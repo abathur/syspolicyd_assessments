@@ -3,18 +3,13 @@ on:
   pull_request:
   push:
 jobs:
-  macos_enabled_test:
-    runs-on: macos-latest
+  tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macos-latest, macos-11.0 ]
+      fail-fast: false
     steps:
-    - uses: actions/checkout@v2
-    - run: ./test.sh
-  macos_disabled_test:
-    runs-on: macos-latest
-    steps:
-    - name: Disable syspolicy assessments
-      run: |
-        spctl --status
-        sudo spctl --master-disable
-        spctl --status || true
-    - uses: actions/checkout@v2
-    - run: ./test.sh
+      - uses: actions/checkout@v2
+      - run: ./fde.expect
+      - run: fdesetup isactive
