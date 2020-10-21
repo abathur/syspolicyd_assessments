@@ -1,6 +1,6 @@
 #! /usr/bin/env expect -df
 
-set PASSPHRASE [exec sudo ./de_kc.py /etc/kcpassword]
+set PASSPHRASE [exec sudo ./de_kc.py]
 
 # Cargo culting: people recommend this; not sure how necessary
 # set send_slow {1 .1}
