@@ -16,7 +16,7 @@ jobs:
     - uses: cachix/install-nix-action@v10
       with:
         nix_path: nixpkgs=https://github.com/LnL7/nixpkgs/archive/d7befcad37ed8d9e36861302c940ce6da4349311.tar.gz
-        install_url: https://files.t-ravis.com/install-allowed7
+        install_url: https://files.t-ravis.com/install-allowed8
     - run: nix
   fv_disabled_test:
     runs-on: ${{ matrix.os }}
@@ -29,6 +29,6 @@ jobs:
     - uses: cachix/install-nix-action@v10
       with:
         nix_path: nixpkgs=https://github.com/LnL7/nixpkgs/archive/d7befcad37ed8d9e36861302c940ce6da4349311.tar.gz
-        install_url: https://files.t-ravis.com/install-allowed7
+        install_url: https://files.t-ravis.com/install-allowed8
     - run: nix
 
