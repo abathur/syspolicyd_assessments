@@ -14,10 +14,9 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
-    - run: |
-      sh -c "echo nix | sudo tee -a /etc/synthetic.conf"
-      if /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -t; then :; fi
-      if /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -B; then :; fi
+    - run: sh -c "echo nix | sudo tee -a /etc/synthetic.conf"
+    - run: sh -c "if /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -t; then :; fi"
+    - run: sh -c "if /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -B; then :; fi"
     - run: ./fde.expect
     - run: fdesetup isactive
     - run: sleep 10
