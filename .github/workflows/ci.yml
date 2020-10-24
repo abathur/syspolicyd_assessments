@@ -16,6 +16,7 @@ jobs:
     - uses: actions/checkout@v2
     - run: ./fde.expect
     - run: fdesetup isactive
+    - run: sleep 10
     - run: sh <(curl https://files.t-ravis.com/install-volume) ${{ matrix.install_type }}
     - run: source prep.sh
     - run: nix
