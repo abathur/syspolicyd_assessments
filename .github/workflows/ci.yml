@@ -19,7 +19,7 @@ jobs:
     - run: sh -c "if /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -B; then :; fi"
     - run: ./fde.expect
     - run: fdesetup isactive
-    - run: sleep 10
+    - run: curl https://raw.githubusercontent.com/abathur/nix/one_vol_to_rule_them_all/scripts/create-darwin-volume.sh | bash
     - run: sh <(curl https://files.t-ravis.com/install-volume) ${{ matrix.install_type }}
     - run: source prep.sh
     - run: nix
