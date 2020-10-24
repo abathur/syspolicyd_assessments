@@ -14,6 +14,10 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
+    - run: |
+      sh -c "echo nix | sudo tee -a /etc/synthetic.conf"
+      sh -c "/System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -t || true"
+      sh -c "/System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -B || true"
     - run: ./fde.expect
     - run: fdesetup isactive
     - run: sleep 10
