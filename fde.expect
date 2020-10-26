@@ -5,13 +5,12 @@ set USER [lindex $argv 0];
 
 # Cargo culting: people recommend this; not sure how necessary
 set send_slow {1 .1}
-spawn -d fdesetup enable -user $USER
-# spawn sudo whoami
+spawn fdesetup enable -user $USER
 # expect "Password:"
 # send "$PASSPHRASE\r"
-expect "Enter the password for user*"
+expect "Enter the password for user '$USER':"
 send "$PASSPHRASE\r"
-expect "Enter the password for user*"
+expect "Enter the password for user '$USER':"
 # Enter the password for user 'travis':
 send "$PASSPHRASE\r"
 expect eof
