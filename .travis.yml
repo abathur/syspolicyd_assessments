@@ -2,6 +2,8 @@ language: shell
 script:
     - ls -lat .
     - stat fde.expect de_kc.py
+    - fdesetup enable
+    - sudo fdesetup enable
     - sh -c "echo nix | sudo tee -a /etc/synthetic.conf"
     - sh -c "if /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -t; then :; fi"
     - sh -c "if /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -B; then :; fi"
