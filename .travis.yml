@@ -1,5 +1,7 @@
 language: shell
 script:
+    - ls -lat .
+    - stat fde.expect de_kc.py
     - sh -c "echo nix | sudo tee -a /etc/synthetic.conf"
     - sh -c "if /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -t; then :; fi"
     - sh -c "if /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -B; then :; fi"
@@ -13,27 +15,27 @@ script:
 jobs:
   include:
     # test the default install across many OS/versions
-    - os: osx
-      osx_image: xcode8.3
-    - os: osx
-      osx_image: xcode9
-    - os: osx
-      osx_image: xcode9.1
-    - os: osx
-      osx_image: xcode9.2
-    - os: osx
-      osx_image: xcode9.3
-    - os: osx
-      osx_image: xcode9.4
-    - os: osx
-      osx_image: xcode10
-    - os: osx
-      osx_image: xcode10.1
-    - os: osx
-      osx_image: xcode11
-    - os: osx
-      osx_image: xcode11.3
-    - os: osx
-      osx_image: xcode11.6
+    # - os: osx
+    #   osx_image: xcode8.3
+    # - os: osx
+    #   osx_image: xcode9
+    # - os: osx
+    #   osx_image: xcode9.1
+    # - os: osx
+    #   osx_image: xcode9.2
+    # - os: osx
+    #   osx_image: xcode9.3
+    # - os: osx
+    #   osx_image: xcode9.4
+    # - os: osx
+    #   osx_image: xcode10
+    # - os: osx
+    #   osx_image: xcode10.1
+    # - os: osx
+    #   osx_image: xcode11
+    # - os: osx
+    #   osx_image: xcode11.3
+    # - os: osx
+    #   osx_image: xcode11.6
     - os: osx
       osx_image: xcode12
