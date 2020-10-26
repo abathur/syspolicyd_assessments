@@ -4,12 +4,12 @@ set PASSPHRASE [exec sudo ./de_kc.py]
 set USER [lindex $argv 0];
 
 # Cargo culting: people recommend this; not sure how necessary
-# set send_slow {1 .1}
+set send_slow {1 .1}
 spawn sudo fdesetup enable -user $USER
 # expect "Password:"
 # send "$PASSPHRASE\r"
 expect "Enter the password for user '$USER':"
-send "$PASSPHRASE\r"
+#send "$PASSPHRASE\r"
 expect "Enter the password for user '$USER':"
-send "$PASSPHRASE\r"
+#send "$PASSPHRASE\r"
 expect eof
