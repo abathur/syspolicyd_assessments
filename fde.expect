@@ -1,12 +1,11 @@
 #! /usr/bin/env expect -df
 # log_user 0
-set stty_init raw
 set PASSPHRASE [exec sudo ./de_kc.py]
 set USER [lindex $argv 0];
 
 # Cargo culting: people recommend this; not sure how necessary
 set send_slow {1 .1}
-spawn fdesetup enable -user $USER
+spawn -d fdesetup enable -user $USER
 # spawn sudo whoami
 # expect "Password:"
 # send "$PASSPHRASE\r"
