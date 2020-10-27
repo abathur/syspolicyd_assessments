@@ -1,0 +1,8 @@
+# fdesetup enable -user $USER
+read -sp "Enter the password for user '$3':" pw
+if [[ -n "$pw" ]]; then
+	read -sp "Enter the password for user '$3':"
+	if [[ -n "$pw" ]]; then
+		echo "Recovery key = 'PRX8-OMKU-Q69W-LVMW-WJ9G-D5PH'"
+	fi
+fi

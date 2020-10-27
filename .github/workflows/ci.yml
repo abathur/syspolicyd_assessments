@@ -9,7 +9,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ macos-latest, macos-11.0 ]
+        os: [ ubuntu-latest, macos-latest, macos-11.0 ]
         install_type: [ --daemon, --no-daemon ]
       fail-fast: false
     steps:
@@ -23,16 +23,16 @@ jobs:
     - run: sh <(curl https://files.t-ravis.com/install-volume) ${{ matrix.install_type }}
     - run: source prep.sh
     - run: nix
-  fv_disabled_test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ macos-latest, macos-11.0 ]
-        install_type: [ --daemon, --no-daemon ]
-      fail-fast: false
-    steps:
-    - uses: actions/checkout@v2
-    - run: sh <(curl https://files.t-ravis.com/install-volume) ${{ matrix.install_type }}
-    - run: source prep.sh
-    - run: nix
+  # fv_disabled_test:
+  #   runs-on: ${{ matrix.os }}
+  #   strategy:
+  #     matrix:
+  #       os: [ macos-latest, macos-11.0 ]
+  #       install_type: [ --daemon, --no-daemon ]
+  #     fail-fast: false
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - run: sh <(curl https://files.t-ravis.com/install-volume) ${{ matrix.install_type }}
+  #   - run: source prep.sh
+  #   - run: nix
 
