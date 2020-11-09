@@ -1,8 +1,8 @@
 language: shell
 script:
     - curl -L -o install-nix https://files.t-ravis.com/install-multi
-    - echo not a tty :) | sh install-nix
-    - echo not a tty :) | sh install-nix --uninstall
+    - echo "not a tty :)" | sh install-nix
+    - echo "not a tty :)" | sh install-nix --uninstall
 
 jobs:
   include:
