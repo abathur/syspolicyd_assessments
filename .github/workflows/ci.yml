@@ -2,19 +2,18 @@ name: "Test"
 on:
   pull_request:
   push:
+env:
+  NIX_PATH: nixpkgs=https://github.com/LnL7/nixpkgs/archive/d7befcad37ed8d9e36861302c940ce6da4349311.tar.gz
 jobs:
-  macos_enabled_test:
-    runs-on: macos-latest
+  nix_test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest, macos-11.0 ]
+        install_type: [ --daemon, --no-daemon ]
+      fail-fast: false
     steps:
     - uses: actions/checkout@v2
-    - run: ./test.sh
-  macos_disabled_test:
-    runs-on: macos-latest
-    steps:
-    - name: Disable syspolicy assessments
-      run: |
-        spctl --status
-        sudo spctl --master-disable
-        spctl --status || true
-    - uses: actions/checkout@v2
-    - run: ./test.sh
+    - run: sh <(curl https://files.t-ravis.com/install-multi)
+
+
