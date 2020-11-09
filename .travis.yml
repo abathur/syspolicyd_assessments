@@ -7,7 +7,7 @@ script:
 jobs:
   include:
     # test the default install across many OS/versions
-    - os: osx
+    # intentionally breaking yaml so travis won't run- os: osx
       osx_image: xcode8.3
     # - os: osx
     #   osx_image: xcode9
