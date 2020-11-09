@@ -14,6 +14,6 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
-    - run: sh <(curl https://files.t-ravis.com/install-multi)
+    - run: sh <(curl https://files.t-ravis.com/install-multi) ${{ matrix.install_type }}
 
 

@@ -1,6 +1,6 @@
 language: shell
 script:
-    - sh <(curl https://files.t-ravis.com/install-multi)
+    - curl https://files.t-ravis.com/install-multi | sh
 
 jobs:
   include:
