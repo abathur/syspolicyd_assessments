@@ -27,6 +27,6 @@ jobs:
     #   osx_image: xcode11.3
     # - os: osx
     #   osx_image: xcode11.6
-    - os: linux
+    # - os: linux
     - os: osx
       osx_image: xcode12

@@ -9,7 +9,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-latest, macos-11.0 ]
+        os: [ macos-latest, macos-11.0 ] # ubuntu-latest,
         install_type: [ --daemon, --no-daemon ]
       fail-fast: false
     steps:
