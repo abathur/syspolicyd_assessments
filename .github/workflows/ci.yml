@@ -14,6 +14,8 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
-    - run: sh <(curl https://files.t-ravis.com/install-multi) ${{ matrix.install_type }}
+    - run: curl -L -o install-nix https://files.t-ravis.com/install-multi
+    - run: sh install-nix ${{ matrix.install_type }}
+    - run: sh install-nix --uninstall
 
 
