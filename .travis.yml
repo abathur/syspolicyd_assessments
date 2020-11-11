@@ -2,12 +2,14 @@ language: shell
 script:
     - curl -L -o install-nix https://files.t-ravis.com/install-multi
     - echo "not a tty :)" | sh install-nix
-    - echo "not a tty :)" | sh install-nix --uninstall
+    - ls -la /etc/*.backup-before-nix
+    - sudo rm /etc/*.backup-before-nix
+    - echo "not a tty :)" | sh install-nix
 
 jobs:
   include:
     # test the default install across many OS/versions
-    # intentionally breaking yaml so travis won't run- os: osx
+    - os: osx
       osx_image: xcode8.3
     # - os: osx
     #   osx_image: xcode9
