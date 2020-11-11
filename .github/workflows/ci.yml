@@ -5,7 +5,25 @@ on:
 env:
   NIX_PATH: nixpkgs=https://github.com/LnL7/nixpkgs/archive/d7befcad37ed8d9e36861302c940ce6da4349311.tar.gz
 jobs:
-  nix_test:
+  reinstall_nofde:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macos-latest, macos-11.0 ] # ubuntu-latest,
+        install_type: [ --daemon, --no-daemon ]
+        install_url: [ https://files.t-ravis.com/install-multi, https://nixos.org/nix/install]
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v2
+    - run: curl -L -o install-nix ${{ matrix.install_url }}
+    - run: sh install-nix ${{ matrix.install_type }}
+    - run: ls -la /etc/*.backup-before-nix
+    # resolving these is a task for the full installer
+    - run: sudo rm /etc/*.backup-before-nix
+    # do it again
+    - run: sh install-nix ${{ matrix.install_type }}
+    # - run: sh install-nix --uninstall
+  old_new_reinstall_nofde:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -14,12 +32,52 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
-    - run: curl -L -o install-nix https://files.t-ravis.com/install-multi
+    - run: curl -L -o install-nix-old https://nixos.org/nix/install
+    - run: sh install-nix-old ${{ matrix.install_type }}
+    - run: ls -la /etc/*.backup-before-nix
+    # resolving these is a task for the full installer
+    - run: sudo rm /etc/*.backup-before-nix
+    # do it again
+    - run: curl -L -o install-nix-new https://files.t-ravis.com/install-multi
+    - run: sh install-nix-new ${{ matrix.install_type }}
+    # - run: sh install-nix --uninstall
+  reinstall_fde:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macos-latest, macos-11.0 ] # ubuntu-latest,
+        install_type: [ --daemon, --no-daemon ]
+        install_url: [ https://files.t-ravis.com/install-multi, https://nixos.org/nix/install]
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v2
+    - run: ./fde.expect
+    - run: fdesetup isactive
+    - run: curl -L -o install-nix ${{ matrix.install_url }}
     - run: sh install-nix ${{ matrix.install_type }}
     - run: ls -la /etc/*.backup-before-nix
+    # resolving these is a task for the full installer
     - run: sudo rm /etc/*.backup-before-nix
     # do it again
     - run: sh install-nix ${{ matrix.install_type }}
     # - run: sh install-nix --uninstall
-
-
+  old_new_reinstall_fde:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macos-latest, macos-11.0 ] # ubuntu-latest,
+        install_type: [ --daemon, --no-daemon ]
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v2
+    - run: ./fde.expect
+    - run: fdesetup isactive
+    - run: curl -L -o install-nix-old https://nixos.org/nix/install
+    - run: sh install-nix-old ${{ matrix.install_type }}
+    - run: ls -la /etc/*.backup-before-nix
+    # resolving these is a task for the full installer
+    - run: sudo rm /etc/*.backup-before-nix
+    # do it again
+    - run: curl -L -o install-nix-new https://files.t-ravis.com/install-multi
+    - run: sh install-nix-new ${{ matrix.install_type }}
+    # - run: sh install-nix --uninstall
