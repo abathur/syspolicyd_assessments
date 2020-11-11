@@ -10,8 +10,8 @@ jobs:
     strategy:
       matrix:
         os: [ macos-latest, macos-11.0 ] # ubuntu-latest,
-        "install_type: [ --daemon, --n"o-d"aemon ]
-        install" _url: [ "https://files.t-ravis.com/install-multi", "https://nixos.org/nix/install" ]
+        install_type: [ --daemon, --no-daemon ]
+        install_url: [ "https://files.t-ravis.com/install-multi", "https://nixos.org/nix/install" ]
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
