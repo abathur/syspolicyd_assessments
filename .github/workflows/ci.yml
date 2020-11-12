@@ -17,9 +17,9 @@ jobs:
     - uses: actions/checkout@v2
     - run: curl -L -o install-nix ${{ matrix.install_url }}
     - run: sh install-nix ${{ matrix.install_type }} --darwin-use-unencrypted-nix-store-volume
-    - run: ls -la /etc/*.backup-before-nix
+    - run: ls -la /etc/*.backup-before-nix || true
     # resolving these is a task for the full installer
-    - run: sudo rm /etc/*.backup-before-nix
+    - run: sudo rm /etc/*.backup-before-nix || true
     # do it again
     - run: sh install-nix ${{ matrix.install_type }} --darwin-use-unencrypted-nix-store-volume
     # - run: sh install-nix --uninstall
@@ -34,9 +34,9 @@ jobs:
     - uses: actions/checkout@v2
     - run: curl -L -o install-nix-old https://nixos.org/nix/install
     - run: sh install-nix-old ${{ matrix.install_type }} --darwin-use-unencrypted-nix-store-volume
-    - run: ls -la /etc/*.backup-before-nix
+    - run: ls -la /etc/*.backup-before-nix || true
     # resolving these is a task for the full installer
-    - run: sudo rm /etc/*.backup-before-nix
+    - run: sudo rm /etc/*.backup-before-nix || true
     # do it again
     - run: curl -L -o install-nix-new https://files.t-ravis.com/install-multi
     - run: sh install-nix-new ${{ matrix.install_type }} --darwin-use-unencrypted-nix-store-volume
