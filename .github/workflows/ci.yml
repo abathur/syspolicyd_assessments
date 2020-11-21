@@ -39,7 +39,7 @@ jobs:
     - run: sudo rm /etc/*.backup-before-nix || true
     # do it again
     - run: curl -L -o install-nix-new https://files.t-ravis.com/install-multi
-    - run: sh install-nix-new ${{ matrix.install_type }} --darwin-use-unencrypted-nix-store-volume
+    - run: sh install-nix-new ${{ matrix.install_type }}
     - run: diskutil list
     # - run: sh install-nix --uninstall
   #
