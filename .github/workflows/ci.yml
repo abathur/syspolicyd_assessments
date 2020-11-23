@@ -22,6 +22,7 @@ jobs:
     - run: sudo rm /etc/*.backup-before-nix || true
     # do it again
     - run: sh install-nix ${{ matrix.install_type }} --darwin-use-unencrypted-nix-store-volume
+    - run: nix doctor || true
     # - run: sh install-nix --uninstall
   old_new_reinstall:
     runs-on: ${{ matrix.os }}
@@ -41,6 +42,25 @@ jobs:
     - run: curl -L -o install-nix-new https://files.t-ravis.com/install-multi
     - run: sh install-nix-new ${{ matrix.install_type }}
     - run: diskutil list
+    - run: nix doctor || true
+  old_new_default_reinstall:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macos-latest, macos-11.0 ] # ubuntu-latest,
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v2
+    - run: curl -L -o install-nix-old https://nixos.org/nix/install
+    - run: sh install-nix-old --darwin-use-unencrypted-nix-store-volume
+    - run: ls -la /etc/*.backup-before-nix || true
+    # resolving these is a task for the full installer
+    - run: sudo rm /etc/*.backup-before-nix || true
+    # do it again
+    - run: curl -L -o install-nix-new https://files.t-ravis.com/install-multi
+    - run: sh install-nix-new
+    - run: diskutil list
+    - run: nix doctor || true
     # - run: sh install-nix --uninstall
   #
   # Ah, right; I'm forgetting that we have to pre-make the mountpoint, because stitching fails once FDE is enabled
