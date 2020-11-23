@@ -22,6 +22,7 @@ jobs:
     - run: sudo rm /etc/*.backup-before-nix || true
     # do it again
     - run: sh install-nix ${{ matrix.install_type }} --darwin-use-unencrypted-nix-store-volume
+    - run: . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh || true
     - run: nix doctor || true
     # - run: sh install-nix --uninstall
   old_new_reinstall:
@@ -42,6 +43,7 @@ jobs:
     - run: curl -L -o install-nix-new https://files.t-ravis.com/install-multi
     - run: sh install-nix-new ${{ matrix.install_type }}
     - run: diskutil list
+    - run: . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh || true
     - run: nix doctor || true
   old_new_default_reinstall:
     runs-on: ${{ matrix.os }}
@@ -60,6 +62,7 @@ jobs:
     - run: curl -L -o install-nix-new https://files.t-ravis.com/install-multi
     - run: sh install-nix-new
     - run: diskutil list
+    - run: . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh || true
     - run: nix doctor || true
     # - run: sh install-nix --uninstall
   #
