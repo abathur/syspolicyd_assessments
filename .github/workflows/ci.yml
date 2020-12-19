@@ -64,6 +64,47 @@ jobs:
     - run: diskutil list
     - run: . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh || true
     - run: nix doctor || true
+  existing_synthetic_symlink_unstitched:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macos-latest, macos-11.0 ] # ubuntu-latest,x
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v2
+    - run: mkdir symnix
+    - run: echo $'nix\t'"${PWD:1}/symnix" | sudo tee /etc/synthetic.conf
+    - run: curl -L -o install-nix-new https://files.t-ravis.com/install-multi
+    - run: sh install-nix-new
+    - run: diskutil list
+    - run: diskutil info /nix || true
+    - run: readlink /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh || true
+    - run: . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh || true
+    - run: nix doctor || true
+  existing_synthetic_symlink_stitched:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macos-latest, macos-11.0 ] # ubuntu-latest,
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v2
+    - run: mkdir symnix
+    - run: echo $'nix\t'"${PWD:1}/symnix" | sudo tee /etc/synthetic.conf
+    - run: /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -t || true
+    - run: /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -B || true
+    - run: echo "supposedly stitched"
+    - run: until readlink /nix; do printf ' X '; done
+    # confirm the symlink
+    - run: ls -la /
+    - run: readlink /nix || true
+    - run: curl -L -o install-nix-new https://files.t-ravis.com/install-multi
+    - run: sh install-nix-new
+    - run: diskutil list
+    - run: diskutil info /nix || true
+    - run: readlink /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh || true
+    - run: . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh || true
+    - run: nix doctor || true
     # - run: sh install-nix --uninstall
   #
   # Ah, right; I'm forgetting that we have to pre-make the mountpoint, because stitching fails once FDE is enabled
