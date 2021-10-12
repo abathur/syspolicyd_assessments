@@ -19,7 +19,7 @@ jobs:
     - run: sh -c "if /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -B; then :; fi"
     - run: ./fde.expect
     - run: fdesetup isactive
-    - run: sh <(curl -L https://nixos.org/nix/install) ${{ matrix.install_type }}
+    - run: sh <(curl -L https://releases.nixos.org/nix/nix-2.3.10) ${{ matrix.install_type }}
     - run: source prep.sh
     - run: nix doctor
     - name: collect sysdiagnose
@@ -40,7 +40,7 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
-    - run: sh <(curl -L https://nixos.org/nix/install) ${{ matrix.install_type }}
+    - run: sh <(curl -L https://releases.nixos.org/nix/nix-2.3.10) ${{ matrix.install_type }}
     - run: source prep.sh
     - run: nix doctor
     - name: collect sysdiagnose
