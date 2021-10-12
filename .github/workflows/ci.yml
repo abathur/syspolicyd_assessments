@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         os: [ macos-latest, macos-11.0 ]
-        install_type: [ --daemon, --no-daemon ]
+        install_type: [ --daemon ]
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
@@ -28,7 +28,7 @@ jobs:
     strategy:
       matrix:
         os: [ macos-latest, macos-11.0 ]
-        install_type: [ --daemon, --no-daemon ]
+        install_type: [ --daemon ]
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
