@@ -17,7 +17,7 @@ jobs:
     - run: sh -c "echo nix | sudo tee -a /etc/synthetic.conf"
     - run: sh -c "if /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -t; then :; fi"
     - run: sh -c "if /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -B; then :; fi"
-    - run: sudo ./fde.expect
+    - run: ./fde.expect
     - run: fdesetup isactive
     - run: sh <(curl -L https://releases.nixos.org/nix/nix-2.4pre-rc1/install) ${{ matrix.install_type }}
     - run: source prep.sh
