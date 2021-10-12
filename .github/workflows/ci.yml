@@ -25,7 +25,7 @@ jobs:
     - name: collect sysdiagnose
       run: |
         mkdir artifacts
-        sysdiagnose -r artifacts
+        sudo sysdiagnose -r artifacts
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
@@ -46,7 +46,7 @@ jobs:
     - name: collect sysdiagnose
       run: |
         mkdir artifacts
-        sysdiagnose -r artifacts
+        sudo sysdiagnose -r artifacts
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
