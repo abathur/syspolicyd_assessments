@@ -20,7 +20,7 @@ jobs:
     - run: ./fde.expect
     - run: fdesetup isactive
     - run: curl https://raw.githubusercontent.com/abathur/nix/one_vol_to_rule_them_all/scripts/create-darwin-volume.sh | bash
-    - run: sh <(curl https://files.t-ravis.com/install-volume) ${{ matrix.install_type }}
+    - run: sh <(curl -L https://releases.nixos.org/nix/nix-2.4pre-rc1/install) ${{ matrix.install_type }}
     - run: source prep.sh
     - run: nix
   fv_disabled_test:
@@ -32,7 +32,7 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
-    - run: sh <(curl https://files.t-ravis.com/install-volume) ${{ matrix.install_type }}
+    - run: sh <(curl -L https://releases.nixos.org/nix/nix-2.4pre-rc1/install) ${{ matrix.install_type }}
     - run: source prep.sh
     - run: nix
 
