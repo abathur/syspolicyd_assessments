@@ -19,7 +19,6 @@ jobs:
     - run: sh -c "if /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -B; then :; fi"
     - run: sudo ./fde.expect
     - run: fdesetup isactive
-    - run: curl https://raw.githubusercontent.com/abathur/nix/one_vol_to_rule_them_all/scripts/create-darwin-volume.sh | bash
     - run: sh <(curl -L https://releases.nixos.org/nix/nix-2.4pre-rc1/install) ${{ matrix.install_type }}
     - run: source prep.sh
     - run: nix doctor
