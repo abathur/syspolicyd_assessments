@@ -9,7 +9,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ macos-latest, macos-11.0 ]
+        os: [ macos-10.15, macos-11 ]
         install_type: [ --daemon ]
       fail-fast: false
     steps:
@@ -22,11 +22,20 @@ jobs:
     - run: sh <(curl -L https://releases.nixos.org/nix/nix-2.4pre-rc1/install) ${{ matrix.install_type }}
     - run: source prep.sh
     - run: nix doctor
+    - name: collect sysdiagnose
+      run: |
+        mkdir artifacts
+        sysdiagnose -r artifacts
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: sysdiagnose (error)
+        path: artifacts
   fv_disabled_test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ macos-latest, macos-11.0 ]
+        os: [ macos-10.15, macos-11 ]
         install_type: [ --daemon ]
       fail-fast: false
     steps:
@@ -34,4 +43,13 @@ jobs:
     - run: sh <(curl -L https://releases.nixos.org/nix/nix-2.4pre-rc1/install) ${{ matrix.install_type }}
     - run: source prep.sh
     - run: nix doctor
+    - name: collect sysdiagnose
+      run: |
+        mkdir artifacts
+        sysdiagnose -r artifacts
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: sysdiagnose (success)
+        path: artifacts
 
